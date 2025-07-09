@@ -61,11 +61,11 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
     setShowPayment(true);
   };
 
-  // This runs *after* successful payment
+  // This runs after successful payment
   const finalizeOrder = async () => {
     const { orderType, items, email, address } = pendingOrder;
     setShowPayment(false);
-    // Call your API
+    // Call api for order
     try {
       const res = await fetch(`${process.env.REACT_APP_API_BASE}/api/orders`, {
         method: "POST",
@@ -83,7 +83,7 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
         alert(
           `✅ Order placed! ID: ${json.orderId} — ${orderType} — Status: ${json.status}`
         );
-        setCart({}); // empty cart
+        setCart({}); // empty the cart
       } else {
         alert(`❌ ${json.error || "Failed to place order."}`);
       }
@@ -99,7 +99,6 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
         ← Back to Results
       </button>
 
-      {/* Tabs */}
       <div
         style={{
           display: "flex",
@@ -124,9 +123,7 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
         ))}
       </div>
 
-      {/* Always show order summary at bottom */}
       <div style={{ marginTop: "30px" }}>
-        {/* <OrderSummary cart={cart} placeOrder={placeOrder} /> */}
         <OrderSummary cart={cart} onOrder={handlePlaceOrder} />
 
         {showPayment && pendingOrder && (
