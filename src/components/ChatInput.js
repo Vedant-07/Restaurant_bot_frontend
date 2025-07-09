@@ -10,7 +10,7 @@ export default function ChatInput({ onSend }) {
   };
 
   return (
-    <div style={{ display: 'flex', gap: '8px' }}>
+    <div style={{ display: 'flex', gap: '8px',marginBottom:'10px' }}>
       <input
         type="text"
         placeholder="Ask e.g. 'i want to eat Chinese'"

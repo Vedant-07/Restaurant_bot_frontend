@@ -255,12 +255,6 @@ function App() {
       <ChatLog messages={messages} />
       <ChatInput onSend={sendMessage} />
 
-      <RestaurantList
-        restaurants={restaurants}
-        onSelect={setSelectedRestaurantId}
-        onReserve={onReserve}
-      />
-
       {/* If ordersList is non-null & showOrders: */}
       {ordersList && showOrders && (
         <>
@@ -289,6 +283,12 @@ function App() {
           />
         </>
       )}
+
+      <RestaurantList
+        restaurants={restaurants}
+        onSelect={setSelectedRestaurantId}
+        onReserve={onReserve}
+      />
     </div>
   );
 }

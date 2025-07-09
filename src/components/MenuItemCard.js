@@ -10,7 +10,7 @@ export default function MenuItemCard({ item, qty, onIncrement, onDecrement }) {
       padding: '8px'
     }}>
       <img
-        src={item.imageUrl || 'https://loremflickr.com/320/240/food'}
+        src={item.imageUrl || 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg'}
         alt={item.name}
         style={{ width: '100%', height: 100, objectFit: 'cover' }}
       />
