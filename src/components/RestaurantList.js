@@ -1,11 +1,25 @@
 import React from "react";
+import Shimmer from "./Shimmer";
 
-export default function RestaurantList({ restaurants, onSelect, onReserve }) {
+export default function RestaurantList({
+  restaurants,
+  onSelect,
+  onReserve,
+  loading,
+}) {
   return (
     <div>
       <h4 style={{ marginBottom: "16px", color: "#444" }}>
         🍽️ Found Restaurants:
       </h4>
+
+      {loading && (
+        <>
+          <Shimmer width="60%" height={24} />
+          <Shimmer width="100%" height={12} />
+          <Shimmer width="80%" height={12} />
+        </>
+      )}
 
       {restaurants.map((r) => (
         <div key={r.id} style={cardStyle}>

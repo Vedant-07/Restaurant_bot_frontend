@@ -14,6 +14,7 @@ function App() {
   const [showOrders, setShowOrders] = useState(false);
   const [reservationsList, setReservationsList] = useState(null);
   const [showReservations, setShowReservations] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -37,12 +38,14 @@ function App() {
 
   // Post user message to backend
   const postChat = async (body) => {
+    setLoading(true);
     const res = await fetch(`${API_BASE}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
     const data = await res.json();
+    setLoading(false);
     return data;
   };
 
@@ -288,6 +291,7 @@ function App() {
         restaurants={restaurants}
         onSelect={setSelectedRestaurantId}
         onReserve={onReserve}
+        loading={loading}
       />
     </div>
   );

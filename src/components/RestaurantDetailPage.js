@@ -11,15 +11,18 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
   const [tab, setTab] = useState("menu"); // 'menu' or 'reviews'
   const [showPayment, setShowPayment] = useState(false);
   const [pendingOrder, setPendingOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${process.env.REACT_APP_API_BASE}/api/restaurant/${restaurantId}`)
       .then((r) => r.json())
       .then((data) => {
         setMenu(data.menu);
         setReviews(data.reviews);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false)); 
   }, [restaurantId]);
 
   const updateQty = (itemId, delta) => {
@@ -139,7 +142,11 @@ export default function RestaurantDetailPage({ restaurantId, onBack }) {
       </div>
 
       {/* Content */}
-      {tab === "menu" ? (
+      {loading ? (
+        <div style={{ padding: "40px", textAlign: "center", color: "#555" }}>
+          Loading...
+        </div>
+      ) : tab === "menu" ? (
         <div
           style={{
             display: "grid",
